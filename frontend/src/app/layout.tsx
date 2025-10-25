@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// import { Buffer } from "buffer";
+// import process from "process";
 
+// if (typeof window !== "undefined") {
+//   (window as any).Buffer = Buffer;
+//   (window as any).process = process;
+// }
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
