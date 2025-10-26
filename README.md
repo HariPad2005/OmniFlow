@@ -65,20 +65,6 @@ OmniFlow makes it effortless to manage and rebalance assets across multiple chai
 
 ---
 
-## 📸 System Flow (Concept)
-
-```mermaid
-graph TD
-  A[User Wallet (MetaMask)] -->|Initialize| B[OmniFlow UI]
-  B -->|Fetch Balances| C[Avail Nexus SDK]
-  B -->|Set Rule| D[Automation Logic]
-  D -->|Trigger Transfer| C
-  C -->|Bridge Tokens| E[Destination Chain]
-  E -->|Confirm & Notify| A
-```
-
----
-
 ## 🧭 Pages & Features
 
 | Page          | Description                                                                |
