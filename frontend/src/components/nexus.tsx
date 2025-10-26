@@ -17,7 +17,7 @@ import { parseUnits } from 'viem'
 import NexusProvider from '@/providers/NexusProvider'
 export default function Nexus() {
   return (
-    <NexusProvider>
+  
     <div className="flex items-center justify-center w-full max-w-4xl flex-col gap-6 z-10">
       
         <Tabs defaultValue="balance" className="w-full items-center">
@@ -30,13 +30,10 @@ export default function Nexus() {
         <TabsContent value="balance" className="w-full items-center">
           <NexusUnifiedBalance />
         </TabsContent>
-
-        {/* --- Send Tokens / Bridge Tab --- */}
-        
+ 
         
         
       </Tabs>
     </div>
-   </NexusProvider>
   )
 }
