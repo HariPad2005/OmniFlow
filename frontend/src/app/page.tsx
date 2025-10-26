@@ -1,62 +1,34 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import ConnectButton from '@/components/connect-button';
-import InitButton from '@/components/init-button';
-import FetchUnifiedBalanceButton from '@/components/fetch-unified-balance-button';
-import DeinitButton from '@/components/de-init-button';
-import { isInitialized } from '@/lib/nexus';
-import { NexusProvider } from '@avail-project/nexus-widgets';
-import TransferButton from '@/components/transfer-button';
+import ConnectWallet from "@/components/blocks/connect-wallet";
+import Nexus from "@/components/nexus";
+import NexusInitButton from "@/components/nexus-init";
+import { useNexus } from "@/providers/NexusProvider";
 
-export default function Page() {
-  const [initialized, setInitialized] = useState(isInitialized());
-  const [balances, setBalances] = useState<any>(null);
-
-  const btn =
-    'px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 ' +
-    'disabled:opacity-50 disabled:cursor-not-allowed';
-
+export default function Home() {
+  const { nexusSDK } = useNexus();
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
-        <ConnectButton className={btn} />
-
-        {/* 🧠 Wrap all Nexus-related buttons inside NexusProvider */}
-        <NexusProvider
-              config={{
-        debug: false, // true to view debug logs
-        network: 'testnet', // "mainnet" (default) or "testnet"
-      }}>
-          <InitButton className={btn} onReady={() => setInitialized(true)} />
-
-          <FetchUnifiedBalanceButton
-            className={btn}
-            onResult={(r) => setBalances(r)}
-          />
-
-          <TransferButton />
-
-          <DeinitButton
-            className={btn}
-            onDone={() => {
-              setInitialized(false);
-              setBalances(null);
-            }}
-          />
-        </NexusProvider>
-
-        <div className="mt-2">
-          <b>Nexus SDK Initialization Status:</b>{' '}
-          {initialized ? 'Initialized' : 'Not initialized'}
-        </div>
-
-        {balances && (
-          <pre className="whitespace-pre-wrap">
-            {JSON.stringify(balances, null, 2)}
-          </pre>
-        )}
+    <div className="font-sans flex flex-col items-center justify-items-center min-h-screen p-8 pb-20 gap-y-6 sm:p-20">
+      <h1 className="text-3xl font-semibold z-10">
+        OmniFlow - Cross Chain Transactions Made Easy
+      </h1>
+      <h2 className="text-lg font-semibold z-10">
+        Autonomous, Privacy-Aware, Cross-Chain Wallet Automation 
+      </h2>
+      <div className="flex gap-x-4 items-center justify-center z-10">
+        <ConnectWallet />
+        <NexusInitButton />
       </div>
-    </main>
+      {nexusSDK?.isInitialized() && <Nexus />}
+      <div
+        className="fixed inset-0 z-0"
+        style={{
+          backgroundImage: `
+            radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #14b8a6 100%)
+          `,
+          backgroundSize: "100% 100%",
+        }}
+      />
+    </div>
   );
 }
